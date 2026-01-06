@@ -21,7 +21,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="{{ route('surat.index') }}">
                     <i class="fas fa-fw fa-envelope-open"></i>
                     <span>Surat</span></a>
             </li>
