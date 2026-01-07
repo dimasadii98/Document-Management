@@ -11,7 +11,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ route('dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -19,19 +19,22 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('surat.index') }}">
                     <i class="fas fa-fw fa-envelope-open"></i>
                     <span>Surat</span></a>
             </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-layer-group"></i>
-                    <span>Kategori</span></a>
-            </li>
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('kategori.index') }}">
+                            <i class="fas fa-fw fa-layer-group"></i>
+                            <span>Kategori</span>
+                        </a>
+                    </li>
+                @endif
+            @endauth
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

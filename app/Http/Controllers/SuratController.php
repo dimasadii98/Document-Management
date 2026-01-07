@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Surat;
+use App\Models\KategoriSurat;
 use Illuminate\Http\Request;
 
 class SuratController extends Controller
@@ -24,13 +25,15 @@ class SuratController extends Controller
 
     public function create()
     {
-        return view('surat.create');
+        $kategori = KategoriSurat::all();
+
+        return view('surat.create', compact('kategori'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required',
+            'judul' => 'required|string|max:255',
             'isi' => 'required',
             'kategori_id' => 'required|exists:kategori_surats,id',
         ]);
@@ -42,7 +45,9 @@ class SuratController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return redirect()->route('surat.index');
+        return redirect()
+            ->route('surat.index')
+            ->with('success', 'Surat berhasil ditambahkan');
     }
 
     public function show(Surat $surat)

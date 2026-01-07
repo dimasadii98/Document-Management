@@ -3,12 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SuratController;
+use App\Http\Controllers\KategoriSuratController;
 
-Route::get('/', function () {
-    return auth()->check()
-        ? redirect('/dashboard')
-        : redirect('/login');
-});
+
 
 Route::get('/login', [AuthController::class, 'showLogin'])
     ->name('login')
@@ -27,4 +24,9 @@ Route::middleware(['auth'])->group(function () {
         ->name('logout');
 
     Route::resource('surat', SuratController::class);
+
+    Route::middleware('admin')->group(function () {
+        Route::resource('kategori', KategoriSuratController::class);
+    });
+
 });
